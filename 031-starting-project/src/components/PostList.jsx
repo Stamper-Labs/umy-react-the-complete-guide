@@ -7,6 +7,11 @@ import Modal from "./Modal.jsx";
 function PostList() {
   const [enteredAuthor, setEnteredAuthor] = useState("");
   const [enteredBody, setEnteredBody] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(true);
+
+  function hideModalHandler() {
+    setIsModalVisible(false);
+  }
 
   function changeAuthorHandler(event) {
     setEnteredAuthor(event.target.value);
@@ -16,14 +21,22 @@ function PostList() {
     setEnteredBody(event.target.value);
   }
 
+  let modalComponent = (
+    <Modal onClose={hideModalHandler}>
+      <NewPost
+        onAuthorChange={changeAuthorHandler}
+        onBodyChange={changeBodyHandler}
+      />
+    </Modal>
+  );
+
+  if (!isModalVisible) {
+    modalComponent = null;
+  }
+
   return (
     <>
-      <Modal>
-        <NewPost
-          onAuthorChange={changeAuthorHandler}
-          onBodyChange={changeBodyHandler}
-        />
-      </Modal>
+      {modalComponent}
       <ul className={classes.posts}>
         <Post author={enteredAuthor} body={enteredBody} />
         <Post author="Valentina" body="React is cool" />
