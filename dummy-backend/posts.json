@@ -1,1 +1,19 @@
-{"posts":[{"id":"0.5672185488641577"},{"id":"0.7840711666920912"},{"body":"This course is hopefully very helpful to you!","author":"Maximilian","id":"post-1"}]}
+{
+  "posts": [
+    {
+      "body": "React is cool",
+      "author": "valentina",
+      "id": "0.7839673456950558"
+    },
+    {
+      "body": "React is awesome",
+      "author": "german",
+      "id": "0.17843855399303665"
+    },
+    {
+      "body": "This course is hopefully very helpful to you!",
+      "author": "Maximilian",
+      "id": "post-1"
+    }
+  ]
+}

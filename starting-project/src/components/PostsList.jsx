@@ -7,21 +7,26 @@ import classes from "./PostsList.module.css";
 
 function PostsList({ isPosting, onStopPosting }) {
   const [posts, setPosts] = useState([]);
+  const [isFetching, setFetching] = useState("");
 
   useEffect(() => {
     async function fetchPosts() {
+      setFetching(true);
       const response = await fetch("http://localhost:8080/posts");
-      const data = response.json();
+      const data = await response.json();
       setPosts(data.posts);
+      setFetching(false);
     }
+    fetchPosts();
   }, []);
 
   function addPostHandler(postData) {
+    console.log("data to store: ", JSON.stringify(postData));
     fetch("http://localhost:8080/posts", {
       method: "POST",
       body: JSON.stringify(postData),
       headers: {
-        "Content-Type": "applicaiton/json",
+        "Content-Type": "application/json",
       },
     });
     setPosts(() => {
@@ -36,12 +41,15 @@ function PostsList({ isPosting, onStopPosting }) {
           <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
         </Modal>
       )}
-      {posts.length === 0 && <h1>There are no posts yet</h1>}
-      <ul className={classes.posts}>
-        {posts.map((post) => (
-          <Post key={post.body} author={post.author} body={post.body} />
-        ))}
-      </ul>
+      {!isFetching && (
+        <ul className={classes.posts}>
+          {posts.map((post) => (
+            <Post key={post.body} author={post.author} body={post.body} />
+          ))}
+        </ul>
+      )}
+      {!isFetching && posts.length === 0 && <h1>there are no posts</h1>}
+      {isFetching && <p>Loading posts...</p>}
     </>
   );
 }
