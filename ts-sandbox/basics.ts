@@ -5,4 +5,4 @@ let userName: string = "gvalenncia";
 let isInstructor: boolean = false;
 
 // More Complex Types
-let hobbies: string[] = ["Sports", "Cooking"];
+let hobbies: string[] = ["Sports", "Cookin"];
