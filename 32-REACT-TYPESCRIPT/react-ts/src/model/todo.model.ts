@@ -1,4 +1,4 @@
-export default class Todo {
+export default class TodoModel {
   id: string;
   value: string;
 
