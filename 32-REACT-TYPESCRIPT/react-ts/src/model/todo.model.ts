@@ -6,4 +6,6 @@ export default class TodoModel {
     this.id = new Date().toISOString();
     this.value = textValue;
   }
+
+  onRemoveTodoItem(idItem: string) {}
 }
